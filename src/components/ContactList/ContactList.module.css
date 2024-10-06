@@ -1,5 +1,14 @@
-.contacts_list{
-    list-style: none;
+.list {
+    list-style-type: none;
     padding: 0;
-    
-}
+  }
+  
+  .item {
+    padding: 10px;
+    border-bottom: 1px solid #ccc;
+  }
+  
+  .item:last-child {
+    border-bottom: none;
+  }
+  

@@ -4,9 +4,10 @@ import { register, login, logout, refreshUser } from './operations';
 const authSlice = createSlice({
   name: 'auth',
   initialState: {
-    user: { name: '', email: '' },
+    user: { name: null, email: null },
     token: null,
     isLoggedIn: false,
+    isRefreshing: false,
   },
   extraReducers: (builder) => {
     builder
@@ -33,3 +34,4 @@ const authSlice = createSlice({
 });
 
 export const authReducer = authSlice.reducer;
+export default authReducer;

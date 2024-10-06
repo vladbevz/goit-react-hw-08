@@ -1,45 +1,38 @@
-import { useDispatch } from "react-redux";
-import { addContact } from "../../redux/contactsOps"; 
-import css from "./ContactForm.module.css";
-import { Formik, Field, Form, ErrorMessage } from 'formik';
-import * as Yup from 'yup';
+import React, { useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { createContact } from '../../redux/contacts/operations';
 
-export default function ContactForm() {
+const ContactForm = () => {
+  const [name, setName] = useState('');
+  const [number, setNumber] = useState('');
   const dispatch = useDispatch();
 
-  const handleSubmit = (values, { resetForm }) => {
-    const newContact = {
-      name: values.username,
-      number: values.usernumber,
-    };
-    dispatch(addContact(newContact)); 
-    resetForm();
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    dispatch(createContact({ name, number }));
+    setName('');
+    setNumber('');
   };
 
-  const feedbackSchema = Yup.object().shape({
-    username: Yup.string().min(3, "Too Short!").max(50, "Too Long!").required("Required"),
-    usernumber: Yup.string().min(3, "Too Short!").max(50, "Too Long!").required("Required"),
-  });
-
   return (
-    <>
-      <Formik 
-        initialValues={{ username: "", usernumber: "" }} 
-        onSubmit={handleSubmit}
-        validationSchema={feedbackSchema}
-      >
-        <Form className={css.container}>
-          <label htmlFor="username">Name</label>
-          <Field type="text" name="username" />
-          <ErrorMessage className={css.error} name="username" component="span" />
-
-          <label htmlFor="usernumber">Number</label>
-          <Field type="text" name="usernumber" />
-          <ErrorMessage className={css.error} name="usernumber" component="span" />
-
-          <button className={css.btn} type="submit">Add contact</button>
-        </Form>
-      </Formik>
-    </>
+    <form onSubmit={handleSubmit}>
+      <input
+        type="text"
+        value={name}
+        onChange={(e) => setName(e.target.value)}
+        placeholder="Name"
+        required
+      />
+      <input
+        type="tel"
+        value={number}
+        onChange={(e) => setNumber(e.target.value)}
+        placeholder="Number"
+        required
+      />
+      <button type="submit">Add Contact</button>
+    </form>
   );
-}
+};
+
+export default ContactForm;
