@@ -6,7 +6,7 @@ const API_URL = 'https://connections-api.goit.global/contacts';
 // Функція для отримання контактів
 export const fetchContacts = createAsyncThunk(
   'contacts/fetchContacts',
-  async () => {
+  async (_, thunkAPI ) => {
     const token = thunkAPI.getState().auth.token; 
     const response = await axios.get(API_URL, {
       headers: {
@@ -25,12 +25,12 @@ export const createContact = createAsyncThunk(
     try {
       const response = await axios.post(API_URL, contact, {
         headers: {
-          Authorization: `Bearer ${token}`, // Додаємо токен до заголовка
+          Authorization: `Bearer ${token}`, 
         },
       });
       return response.data;
     } catch (error) {
-      return thunkAPI.rejectWithValue(error.response.data); // Обробка помилок
+      return thunkAPI.rejectWithValue(error.response.data); 
     }
   }
 );
@@ -38,11 +38,11 @@ export const createContact = createAsyncThunk(
 // Функція для видалення контакту
 export const deleteContact = createAsyncThunk(
   'contacts/deleteContact',
-  async (contactId) => {
+  async (contactId, thunkAPI) => {
     const token = thunkAPI.getState().auth.token; 
     await axios.delete(`${API_URL}/${contactId}`, {
       headers: {
-        Authorization: `Bearer ${token}`, // Додаємо токен до заголовка
+        Authorization: `Bearer ${token}`, 
       },
     });
     return contactId;

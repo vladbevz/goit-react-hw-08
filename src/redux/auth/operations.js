@@ -15,7 +15,7 @@ export const register = createAsyncThunk('auth/register', async (userData, thunk
 export const login = createAsyncThunk('auth/login', async (userData, thunkAPI) => {
   try {
     const response = await axios.post('https://connections-api.goit.global/users/login', userData);
-    localStorage.setItem('token', response.data.token); // Зберігаємо токен
+    localStorage.setItem('token', response.data.token); 
     return response.data;
   } catch (error) {
     return thunkAPI.rejectWithValue(error.response.data);
@@ -29,10 +29,10 @@ export const logout = createAsyncThunk('auth/logout', async (_, thunkAPI) => {
   try {
     await axios.post('https://connections-api.goit.global/users/logout', {}, {
       headers: {
-        Authorization: `Bearer ${token}`, // Додаємо токен до заголовка
+        Authorization: `Bearer ${token}`, 
       },
     });
-    localStorage.removeItem('token'); // Видаляємо токен після виходу
+    localStorage.removeItem('token'); 
   } catch (error) {
     return thunkAPI.rejectWithValue(error.response.data);
   }
@@ -47,7 +47,7 @@ export const refreshUser = createAsyncThunk('auth/refreshUser', async (_, thunkA
   try {
     const response = await axios.get('/users/current', {
       headers: {
-        Authorization: `Bearer ${token}`, // Додаємо токен до заголовка
+        Authorization: `Bearer ${token}`, 
       },
     });
     return response.data;

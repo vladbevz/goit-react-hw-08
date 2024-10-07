@@ -1,14 +1,33 @@
-.list {
-    list-style-type: none;
-    padding: 0;
-  }
-  
-  .item {
-    padding: 10px;
-    border-bottom: 1px solid #ccc;
-  }
-  
-  .item:last-child {
-    border-bottom: none;
-  }
-  
+.contactList {
+  list-style-type: none;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.contactItem {
+  border: 1px solid #ddd;
+
+  background-color: #f9f9f9; 
+  border-radius: 5%;
+  color: #444; 
+  padding: 10px;
+  margin: 10px 0;
+  width: 300px;
+  display: flex;
+  justify-content: space-between; 
+  align-items: center; 
+}
+
+.deleteButton {
+  background-color: #ff5252;
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  cursor: pointer;
+}
+
+.deleteButton:hover {
+  background-color: #ff1744;
+}
