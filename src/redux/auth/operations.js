@@ -45,7 +45,7 @@ export const refreshUser = createAsyncThunk('auth/refreshUser', async (_, thunkA
     return thunkAPI.rejectWithValue('No token found');
   }
   try {
-    const response = await axios.get('/users/current', {
+    const response = await axios.get('https://connections-api.goit.global/users/current', {
       headers: {
         Authorization: `Bearer ${token}`, 
       },
